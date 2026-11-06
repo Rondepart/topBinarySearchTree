@@ -1,5 +1,5 @@
 {
-  "name": "webpackvanillajstemplate",
+  "name": "topBinarySearchTree",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,16 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rondepart/webpackVanillaJSTemplate.git"
+    "url": "git+https://github.com/Rondepart/topBinarySearchTree.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/Rondepart/webpackVanillaJSTemplate/issues"
+    "url": "https://github.com/Rondepart/topBinarySearchTree/issues"
   },
-  "homepage": "https://github.com/Rondepart/webpackVanillaJSTemplate#readme",
+  "homepage": "https://github.com/Rondepart/topBinarySearchTree#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.29.7",
     "@eslint/js": "^10.0.1",
