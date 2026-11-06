@@ -24,4 +24,17 @@ class Tree {
 
     return node;
   }
+
+  includes(value) {
+
+    let currNode = this.root;
+    while(currNode !== null) {
+      if(currNode.data === value) return true;
+      currNode = value < currNode.data ? currNode.left : currNode.right;
+    }
+    return false;
+  }
 }
+
+const tree = new Tree([6, 7, 10, 11, 69, 85, 2, 1, 8, 12]);
+console.log(tree.includes(7));
