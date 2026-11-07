@@ -90,6 +90,24 @@ class Tree {
     else parentNode.right = childNode;
   }
   
+  levelOrderForEach(callback = null) {
+    if(callback === null) throw new Error("Callback is required");
+    if(this.root === null) return;
+  
+    let currNode = this.root;
+    const arr = [currNode];
+
+    while(arr.length !== 0) {
+      callback(currNode.data);
+
+      if(currNode.left !== null) arr.push(currNode.left);
+      if(currNode.right !== null) arr.push(currNode.right);
+      
+      arr.shift();
+
+      currNode = arr[0] !== null ? arr[0] : null;
+    }
+  }
 
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
@@ -107,3 +125,4 @@ console.log(tree.includes(7));
 tree.insert(67);
 tree.deleteItem(10);
 tree.prettyPrint();
+tree.levelOrderForEach((value) => console.log(value));
