@@ -56,6 +56,41 @@ class Tree {
     }
   }
 
+  deleteItem(value) {
+    let parentNode = null;
+    let currNode = this.root;
+
+    // find node
+    while(currNode !== null && currNode.data !== value) {
+      parentNode = currNode;
+      currNode = value < currNode.data ? currNode.left : currNode.right;
+    }
+
+    if(currNode === null) return;
+
+    // handle 2 children
+    if(currNode.left !== null && currNode.right !== null) {
+      // find successor
+      let heirNode = currNode.right;
+      let heirParent = currNode;
+      while(heirNode.left !== null) {
+        heirParent = heirNode;
+        heirNode = heirNode.left;
+      }
+      currNode.data = heirNode.data;
+      parentNode = heirParent;
+      currNode = heirNode;
+    } 
+
+    // handles 0 or 1 child
+    const childNode = currNode.left !== null ? currNode.left : currNode.right;
+
+    if(parentNode === null) this.root = childNode;
+    else if (parentNode.left === currNode) parentNode.left = childNode;
+    else parentNode.right = childNode;
+  }
+  
+
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -70,4 +105,5 @@ class Tree {
 const tree = new Tree([6, 7, 10, 11, 69, 85, 2, 1, 8, 12]);
 console.log(tree.includes(7));
 tree.insert(67);
+tree.deleteItem(10);
 tree.prettyPrint();
