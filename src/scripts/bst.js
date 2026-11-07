@@ -26,15 +26,48 @@ class Tree {
   }
 
   includes(value) {
-
     let currNode = this.root;
+    
     while(currNode !== null) {
       if(currNode.data === value) return true;
       currNode = value < currNode.data ? currNode.left : currNode.right;
     }
     return false;
   }
+
+  insert(value) {
+    let parentNode = null;
+    let currNode = this.root;
+
+    while(currNode !== null) {
+      if(currNode.data === value) return;
+      parentNode = currNode;
+      currNode = value < currNode.data ? currNode.left : currNode.right;
+    }
+
+    const newNode = new Node(value);
+
+    if(parentNode === null) {
+      this.root = value;
+    } else if(value < parentNode.data) {
+      parentNode.left = newNode;
+    } else {
+      parentNode.right = newNode; 
+    }
+  }
+
+  prettyPrint(node = this.root, prefix = '', isLeft = true) {
+    if (node === null || node === undefined) {
+      return;
+    }
+
+    this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  }  
 }
 
 const tree = new Tree([6, 7, 10, 11, 69, 85, 2, 1, 8, 12]);
 console.log(tree.includes(7));
+tree.insert(67);
+tree.prettyPrint();
