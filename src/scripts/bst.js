@@ -109,6 +109,63 @@ class Tree {
     }
   }
 
+  inOrderForEach(callback = null) {
+    if(callback === null) throw new Error("Callback is required");
+    if (this.root === null) return;
+
+    const arr = [];
+    let currNode = this.root;
+
+    while(currNode !== null || arr.length > 0) {
+      while(currNode !== null) {
+        arr.push(currNode);
+        currNode = currNode.left;
+      }
+      currNode = arr.pop();
+      callback(currNode.data);
+      currNode = currNode.right;
+    }
+  }
+
+  preOrderForEach(callback = null) {
+    if(callback === null) throw new Error("Callback is required");
+    if (this.root === null) return;
+
+    const arr = [this.root];
+
+    while (arr.length > 0) {
+      const currNode = arr.pop();
+      callback(currNode.data);
+      if (currNode.left !== null) arr.push(currNode.left);
+      if (currNode.right !== null) arr.push(currNode.right);
+    }
+  }
+  
+  postOrderForEach(callback = null) {
+    if(callback === null) throw new Error("Callback is required");
+    if (this.root === null) return;
+
+    const arr = [];
+    let currNode = this.root;
+    let prevNode = null;
+
+    while (currNode !== null || arr.length > 0) {
+      while(currNode !== null) {
+        arr.push(currNode);
+        currNode = currNode.left;
+      }
+      
+      const lastNode = arr[arr.length - 1];
+      if(lastNode.right !== null && lastNode.right !== prevNode) {
+        currNode = lastNode.right;
+      } else {
+        callback(lastNode.data);
+        prevNode = arr.pop();
+      }
+    }
+  }
+
+
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -125,4 +182,4 @@ console.log(tree.includes(7));
 tree.insert(67);
 tree.deleteItem(10);
 tree.prettyPrint();
-tree.levelOrderForEach((value) => console.log(value));
+tree.postOrderForEach((value) => console.log(value));
