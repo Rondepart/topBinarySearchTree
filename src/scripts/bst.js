@@ -181,6 +181,18 @@ class Tree {
     return currNode = currNode === null ? undefined : this.#nodeHeight(currNode);
   }
 
+  depth(value) {
+    let currNode = this.root;
+    let depth = 0;
+
+    while(currNode !== null && currNode.data !== value) {
+      currNode = value < currNode.data ? currNode.left : currNode.right; 
+      depth++;
+    }
+
+    return currNode = currNode === null ? undefined : depth;
+  }
+  
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -198,4 +210,5 @@ tree.insert(67);
 tree.deleteItem(10);
 tree.prettyPrint();
 console.log(`height: ${tree.height(11)}`);
+console.log(`depth: ${tree.depth(11)}`);
 tree.postOrderForEach((value) => console.log(value));
