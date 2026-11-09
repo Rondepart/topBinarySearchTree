@@ -165,6 +165,21 @@ class Tree {
     }
   }
 
+  #nodeHeight(node) {
+    if(node === null) return -1;
+    return 1 + Math.max(this.#nodeHeight(node.left), this.#nodeHeight(node.right));
+  }
+
+  height(value) {
+    if(this.root === null) return undefined;
+
+    let currNode = this.root;
+    while(currNode !== null && currNode.data !== value) {
+      currNode = value < currNode.data ? currNode.left : currNode.right; 
+    }
+
+    return currNode = currNode === null ? undefined : this.#nodeHeight(currNode);
+  }
 
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
@@ -182,4 +197,5 @@ console.log(tree.includes(7));
 tree.insert(67);
 tree.deleteItem(10);
 tree.prettyPrint();
+console.log(`height: ${tree.height(11)}`);
 tree.postOrderForEach((value) => console.log(value));
