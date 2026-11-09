@@ -203,6 +203,12 @@ class Tree {
     return this.#checkTreeBalance(this.root);  
   }
 
+  rebalance() {
+    const arr = []
+    this.inOrderForEach((elem) => arr.push(elem));
+    this.root = this.buildTree(arr);
+  }
+
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -222,4 +228,6 @@ tree.prettyPrint();
 console.log(`height: ${tree.height(11)}`);
 console.log(`depth: ${tree.depth(11)}`);
 console.log(tree.isBalanced());
+tree.rebalance();
+tree.prettyPrint();
 // tree.postOrderForEach((value) => console.log(value));
