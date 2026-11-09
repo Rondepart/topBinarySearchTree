@@ -221,13 +221,4 @@ class Tree {
 }
 
 const tree = new Tree([6, 7, 10, 11, 69, 85, 2, 1, 8, 12]);
-console.log(tree.includes(7));
-tree.insert(67);
-tree.deleteItem(10);
 tree.prettyPrint();
-console.log(`height: ${tree.height(11)}`);
-console.log(`depth: ${tree.depth(11)}`);
-console.log(tree.isBalanced());
-tree.rebalance();
-tree.prettyPrint();
-// tree.postOrderForEach((value) => console.log(value));
