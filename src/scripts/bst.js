@@ -193,6 +193,16 @@ class Tree {
     return currNode = currNode === null ? undefined : depth;
   }
   
+  #checkTreeBalance(node) {
+    if(node === null) return true;
+    const diff = Math.abs(this.#nodeHeight(node.left) - this.#nodeHeight(node.right));
+    return diff <= 1 && this.#checkTreeBalance(node.left) && this.#checkTreeBalance(node.right);
+  }
+
+  isBalanced() {
+    return this.#checkTreeBalance(this.root);  
+  }
+
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -211,4 +221,5 @@ tree.deleteItem(10);
 tree.prettyPrint();
 console.log(`height: ${tree.height(11)}`);
 console.log(`depth: ${tree.depth(11)}`);
-tree.postOrderForEach((value) => console.log(value));
+console.log(tree.isBalanced());
+// tree.postOrderForEach((value) => console.log(value));
